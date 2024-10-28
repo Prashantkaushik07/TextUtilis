@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+/* eslint-disable no-const-assign */
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import './App.css';
+// import About from './Components/About';
+import Navbar from './Components/Navbar';
+import TextForm from './Components/TextForm';
+// import About from './Components/About';
+
 
 function App() {
+  const [mode, setMode] = useState('Dark');
+
+  const toggleMode = ()=>{
+    if(mode ==='light'){
+      setMode = ('dark');
+      document.body.style.backgroundColor = 'black';
+  }else{
+      setMode = ('light');
+      document.body.style.backgroundColor = 'white';
+  }
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <Navbar title="TextUtils"  mode={mode}  toggleMode={toggleMode} />
+    {/* {<Navbar title="TextUtils" />} */}
+    <div className="container my-3"> 
+    {<TextForm heading="Enter the text to Analyze below"/>}
+    {/* <About /> */}
     </div>
+    
+    </>
   );
 }
 
