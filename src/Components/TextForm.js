@@ -42,9 +42,27 @@ export default function TextForm(props) {
     setText(newText);
   };
 
+  
+// download file
+const handleDownloadClick = () => {
+  const filename = "downloaded_text.word";
+   downloadStyledTextFile(filename, text, fontStyle);
+  };
+
   const handleFontStyleChange = (event) => {
     setFontStyle(event.target.value);
   };
+
+  const downloadStyledTextFile = (filename, text, fontStyle) => {
+    const blob = new Blob([text], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = window.URL.createObjectURL(blob);
+    link.style.fontFamily = fontStyle;
+    link.click();
+    window.URL.revokeObjectURL(link.href);
+   }
+  
 
   const calculateCounts = (text) => {
     const charCount = text.length;
@@ -155,28 +173,10 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-2 my-2" onClick={handleCopyClick}>
           Copy to Clipboard
         </button>
-        {/* <div className="container my-4">
-          <h2>Image to WebP Converter</h2>
-          <input
-            type="file"
-            accept="image/png, image/jpeg, image/svg+xml"
-            className="form-control"
-            onChange={handleFileChange}
-          />
-          <button className="btn btn-primary my-2" onClick={handleConvert}>
-            Convert to WebP
+        <button className="btn btn-primary mx-2 my-2" onClick={handleDownloadClick}>
+          Download text
           </button>
-          {convertedWebP && (
-            <>
-              <img src={convertedWebP} alt="Converted WebP" className="img-fluid" />
-              <button className="btn btn-success my-2" onClick={downloadWebP}>
-                Download WebP
-              </button>
-            </>
-          )}
-        </div> */}
-      </div>
-      <div className="container my-3">
+          <div className="container my-3">
         <h1>Your text summary</h1>
         <p>
           Character Count: {charCount} | Word Count: {wordCount} | Sentence Count: {sentenceCount} | Line Count:{" "}
@@ -185,6 +185,29 @@ export default function TextForm(props) {
         <p>{0.008 * text.split("").length} minutes read</p>
         <h3 style={{ fontFamily: fontStyle }}>{text}</h3>
       </div>
+          
+        {/* <div className="container my-4">
+          <h2>Image to WebP Converter</h2>
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/svg+xml"
+            className="form-control my-4 mx-4 "
+            onChange={handleFileChange}
+          />
+          <button className="btn btn-primary mx-2 my-2" onClick={handleConvert}>
+            Convert to WebP
+          </button>
+          {convertedWebP && (
+            <>
+              <img src={convertedWebP} alt="Converted WebP" className="img-fluid" />
+              <button className="btn btn-success my-2 mx-2" onClick={downloadWebP}>
+                Download WebP
+              </button>
+            </>
+          )}
+        </div> */}
+      </div>
+      
     </>
   );
 }
