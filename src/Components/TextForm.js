@@ -3,9 +3,9 @@ import React, { useState } from "react";
 export default function TextForm(props) {
   const [text, setText] = useState("");
   const [fontStyle, setFontStyle] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [convertedWebP, setConvertedWebP] = useState(null);
-  const [imageName, setImageName] = useState("");
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [convertedWebP, setConvertedWebP] = useState(null);
+  // const [imageName, setImageName] = useState("");
 
   // Text Manipulation Handlers
   const handleUpClick = () => {
@@ -75,61 +75,61 @@ const handleDownloadClick = () => {
   const { charCount, wordCount, sentenceCount, lineCount } = calculateCounts(text);
 
   // Image to WebP Handlers
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (!file) {
-      alert("Please select an image file.");
-      return;
-    }
-    setSelectedFile(file);
-    setImageName(file.name.split(".")[0]);
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (!file) {
+  //     alert("Please select an image file.");
+  //     return;
+  //   }
+  //   setSelectedFile(file);
+  //   setImageName(file.name.split(".")[0]);
+  // };
 
-  const handleConvert = () => {
-    if (!selectedFile) {
-      alert("No file selected. Please choose a file to convert.");
-      return;
-    }
-    convertImageToWebP(selectedFile);
-  };
+  // const handleConvert = () => {
+  //   if (!selectedFile) {
+  //     alert("No file selected. Please choose a file to convert.");
+  //     return;
+  //   }
+  //   convertImageToWebP(selectedFile);
+  // };
 
-  const convertImageToWebP = (file) => {
-    const reader = new FileReader();
-    const img = new Image();
+  // const convertImageToWebP = (file) => {
+  //   const reader = new FileReader();
+  //   const img = new Image();
 
-    reader.onload = (e) => {
-      img.src = e.target.result;
-    };
+  //   reader.onload = (e) => {
+  //     img.src = e.target.result;
+  //   };
 
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+  //   img.onload = () => {
+  //     const canvas = document.createElement("canvas");
+  //     const ctx = canvas.getContext("2d");
+  //     canvas.width = img.width;
+  //     canvas.height = img.height;
+  //     ctx.drawImage(img, 0, 0);
 
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            setConvertedWebP(URL.createObjectURL(blob));
-          } else {
-            alert("Failed to convert image to WebP.");
-          }
-        },
-        "image/webp",
-        0.8
-      );
-    };
+  //     canvas.toBlob(
+  //       (blob) => {
+  //         if (blob) {
+  //           setConvertedWebP(URL.createObjectURL(blob));
+  //         } else {
+  //           alert("Failed to convert image to WebP.");
+  //         }
+  //       },
+  //       "image/webp",
+  //       0.8
+  //     );
+  //   };
 
-    reader.readAsDataURL(file);
-  };
+  //   reader.readAsDataURL(file);
+  // };
 
-  const downloadWebP = () => {
-    const link = document.createElement("a");
-    link.href = convertedWebP;
-    link.download = `${imageName}.webp`;
-    link.click();
-  };
+  // const downloadWebP = () => {
+  //   const link = document.createElement("a");
+  //   link.href = convertedWebP;
+  //   link.download = `${imageName}.webp`;
+  //   link.click();
+  // };
 
   return (
     <>

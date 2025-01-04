@@ -5,7 +5,7 @@ import './App.css';
 // import About from './Components/About'; // Remove if not used
 import Navbar from './Components/Navbar';
 import TextForm from './Components/TextForm';
-import ImageToWebPConverter from './Components/ImageToWebPConverter'; // Corrected the component name
+// import ImageToWebPConverter from './Components/ImageToWebPConverter'; // Corrected the component name
 import "bootstrap/dist/css/bootstrap.min.css";
 // import AdvancedImageConverter from './Components/ImageToWebPConverter';
 function App() {
@@ -34,7 +34,7 @@ function App() {
       <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
       <div className="container my-3">
         <TextForm heading="Enter the text to Analyze below" />
-        <ImageToWebPConverter />
+        {/* <ImageToWebPConverter /> */}
         {/* <AdvancedImageConverter /> */}
       </div>
     </>
