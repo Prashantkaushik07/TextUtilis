@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7dfc83663866c17ec7d08a3d782a209d",
+    "revision": "5292ade5bfcef18ad1092c7c73e27481",
     "url": "/TextUtilis/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TextUtilis/static/css/2.b71989ea.chunk.css"
   },
   {
-    "revision": "e5e19857f6fd81909033",
+    "revision": "73c1a846f2f82679bc30",
     "url": "/TextUtilis/static/css/main.f77632a9.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TextUtilis/static/js/3.a29efab2.chunk.js"
   },
   {
-    "revision": "e5e19857f6fd81909033",
-    "url": "/TextUtilis/static/js/main.6ddb0904.chunk.js"
+    "revision": "73c1a846f2f82679bc30",
+    "url": "/TextUtilis/static/js/main.c8211e17.chunk.js"
   },
   {
     "revision": "d1e4fb0d56a0262b27da",
