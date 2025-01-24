@@ -1,0 +1,733 @@
+Success! Created textutilis at E:\office\textutilis
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+  cd E:\office\textutilis
+  npm start
+
+Happy hacking!
+PS E:\office\textutilis> 
+
+
+Components  file name=>About.js
+import React from "react";
+
+export default function About() {
+  let myStyle = {
+    color: "white",
+    backgroundColor: "black"
+  }
+  return (
+    <div className="container" style={myStyle}>
+      <h1 className="my-3">About Us</h1>
+      <div class="accordion" id="accordionExample" style={myStyle}>
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Accordion Item 1
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#accordionExample"
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>This is the first item's accordion body.</strong> It is
+              shown by default, until the collapse plugin adds the appropriate
+              classes that we use to style each element. These classes control
+              the overall appearance, as well as the showing and hiding via CSS
+              transitions. You can modify any of this with custom CSS or
+              overriding our default variables. It's also worth noting that just
+              about any HTML can go within the <code>.accordion-body</code>,
+              though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item" style={myStyle}>
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Accordion Item 2
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>This is the second item's accordion body.</strong> It is
+              hidden by default, until the collapse plugin adds the appropriate
+              classes that we use to style each element. These classes control
+              the overall appearance, as well as the showing and hiding via CSS
+              transitions. You can modify any of this with custom CSS or
+              overriding our default variables. It's also worth noting that just
+              about any HTML can go within the <code>.accordion-body</code>,
+              though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item" style={myStyle}>
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              Accordion Item 3
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>This is the third item's accordion body.</strong> It is
+              hidden by default, until the collapse plugin adds the appropriate
+              classes that we use to style each element. These classes control
+              the overall appearance, as well as the showing and hiding via CSS
+              transitions. You can modify any of this with custom CSS or
+              overriding our default variables. It's also worth noting that just
+              about any HTML can go within the <code>.accordion-body</code>,
+              though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container my-3">
+        <button type="button" className="btn btn-primary">
+          Enable dark mode
+        </button>
+      </div>
+    </div>
+  );
+}
+
+//ImageToWebPConverter.js
+import React, { useState } from "react";
+
+const MageToWebPConverter = () => {
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [convertedWebP, setConvertedWebP] = useState(null);
+    const [imageName, setImageName] = useState("");
+    const [resolution, setResolution] = useState("100"); // Compression percentage or resolution in pixels
+    const [isPercentage, setIsPercentage] = useState(true); // Flag to toggle between percentage and pixels
+    const [compressedImage, setCompressedImage] = useState(null); // To hold the compressed image
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (!file) {
+            alert("Please select an image file.");
+            return;
+        }
+        setSelectedFile(file);
+        setImageName(file.name.split(".")[0]); // Save original image name for download
+    };
+
+    const handleConvert = () => {
+        if (!selectedFile) {
+            alert("No file selected. Please choose a file to convert.");
+            return;
+        }
+        convertImageToWebP(selectedFile);
+    };
+
+    const handleCompress = () => {
+        if (!selectedFile) {
+            alert("No file selected. Please choose a file to compress.");
+            return;
+        }
+        compressImage(selectedFile);
+    };
+
+    const compressImage = (file) => {
+        const reader = new FileReader();
+        const img = new Image();
+
+        reader.onload = (e) => {
+            img.src = e.target.result;
+        };
+
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            let newWidth, newHeight;
+
+            if (isPercentage) {
+                // Resize based on percentage
+                const scaleFactor = parseInt(resolution) / 100;
+                newWidth = img.width * scaleFactor;
+                newHeight = img.height * scaleFactor;
+            } else {
+                // Resize based on pixels
+                newWidth = parseInt(resolution);
+                newHeight = (newWidth / img.width) * img.height; // Maintain aspect ratio
+            }
+
+            // Set canvas dimensions
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+
+            // Draw the resized image on the canvas
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+            // Convert canvas to compressed image (JPEG/PNG)
+            canvas.toBlob(
+                (blob) => {
+                    if (blob) {
+                        setCompressedImage(URL.createObjectURL(blob));
+                    } else {
+                        alert("Failed to compress image.");
+                    }
+                },
+                "image/jpeg", // Change this to "image/png" if you want PNG compression
+                0.7 // Quality (0.1 - 1.0) for JPEG compression, you can adjust
+            );
+        };
+
+        reader.readAsDataURL(file);
+    };
+
+    const convertImageToWebP = (file) => {
+        const reader = new FileReader();
+        const img = new Image();
+
+        reader.onload = (e) => {
+            img.src = e.target.result;
+        };
+
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            let newWidth, newHeight;
+
+            if (isPercentage) {
+                // Resize based on percentage
+                const scaleFactor = parseInt(resolution) / 100;
+                newWidth = img.width * scaleFactor;
+                newHeight = img.height * scaleFactor;
+            } else {
+                // Resize based on pixels
+                newWidth = parseInt(resolution);
+                newHeight = (newWidth / img.width) * img.height; // Maintain aspect ratio
+            }
+
+            // Set canvas dimensions
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+
+            // Draw the resized image on the canvas
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+            // Convert canvas to WebP
+            canvas.toBlob(
+                (blob) => {
+                    if (blob) {
+                        setConvertedWebP(URL.createObjectURL(blob));
+                    } else {
+                        alert("Failed to convert image to WebP.");
+                    }
+                },
+                "image/webp",
+                0.8 // Quality (0.1 - 1.0)
+            );
+        };
+
+        reader.readAsDataURL(file);
+    };
+
+    const downloadCompressedImage = () => {
+        const link = document.createElement("a");
+        link.href = compressedImage;
+        link.download = `${imageName}-compressed.jpg`; // For JPEG format
+        link.click();
+    };
+
+    const downloadWebP = () => {
+        const link = document.createElement("a");
+        link.href = convertedWebP;
+        link.download = `${imageName}.webp`;
+        link.click();
+    };
+
+    return (
+        <div className="container text-center my-3">
+            <h2>Image to WebP Converter & Image Compressor</h2>
+            <div className="mb-3">
+                <input
+                    type="file"
+                    accept="image/png, image/jpeg, image/svg+xml"
+                    className="form-control"
+                    onChange={handleFileChange}
+                />
+            </div>
+            <div className="mb-3">
+                <label>Resolution (in pixels or percentage):</label>
+                <input
+                    type="number"
+                    className="form-control"
+                    value={resolution}
+                    onChange={(e) => setResolution(e.target.value)}
+                />
+                <div>
+                    <input
+                        type="radio"
+                        id="percentage"
+                        checked={isPercentage}
+                        onChange={() => setIsPercentage(true)}
+                    />
+                    <label htmlFor="percentage">Percentage</label>
+                    <input
+                        type="radio"
+                        id="pixels"
+                        checked={!isPercentage}
+                        onChange={() => setIsPercentage(false)}
+                    />
+                    <label htmlFor="pixels">Pixels</label>
+                </div>
+            </div>
+
+            <button
+                className="btn btn-primary ml-3"
+                onClick={handleConvert}
+                disabled={!selectedFile}
+            >
+                Convert to WebP
+            </button>
+
+            <button
+                className="btn btn-warning ml-3"
+                onClick={handleCompress}
+                disabled={!selectedFile}
+            >
+                Compress Image
+            </button>
+
+            <br />
+            {compressedImage && (
+                <>
+                    <div className="my-3">
+                        <h5>Compression Successful! Preview below:</h5>
+                        <img
+                            src={compressedImage}
+                            alt="Compressed Image"
+                            style={{ maxWidth: "100%", height: "auto" }}
+                        />
+                    </div>
+                    <button
+                        className="btn btn-success"
+                        onClick={downloadCompressedImage}
+                    >
+                        Download Compressed Image
+                    </button>
+                </>
+            )}
+
+            {convertedWebP && (
+                <>
+                    <div className="my-3">
+                        <h5>Conversion Successful! Preview below:</h5>
+                        <img
+                            src={convertedWebP}
+                            alt="Converted WebP"
+                            style={{ maxWidth: "100%", height: "auto" }}
+                        />
+                    </div>
+                    <button
+                        className="btn btn-success"
+                        onClick={downloadWebP}
+                    >
+                        Download WebP
+                    </button>
+                </>
+            )}
+        </div>
+    );
+};
+
+export default MageToWebPConverter;
+
+
+//Navbar Components file
+import React from 'react'
+import PropTypes from 'prop-types'
+
+export default function Navbar(props) {
+  return (
+    <>
+      <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">{props.title}</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/">{props.aboutText}</a>
+              </li>
+            </ul>
+            <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+              <input 
+                className="form-check-input" 
+                onClick={props.toggleMode} 
+                type="checkbox" 
+                role="switch" 
+                id="flexSwitchCheckChecked" 
+                checked={props.mode === 'dark'} // Dynamically manage checked state
+              />
+              <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
+                Enable Dark or Light
+              </label>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </>
+  )
+}
+
+Navbar.propTypes = {
+  title: PropTypes.string,
+  aboutText: PropTypes.string,
+  mode: PropTypes.string.isRequired,
+  toggleMode: PropTypes.func.isRequired,
+}
+
+//TextForm components file
+import React, { useState } from "react";
+
+export default function TextForm(props) {
+  const [text, setText] = useState("");
+  const [fontStyle, setFontStyle] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [convertedWebP, setConvertedWebP] = useState(null);
+  const [imageName, setImageName] = useState("");
+
+  // Text Manipulation Handlers
+  const handleUpClick = () => {
+    let newText = text.toUpperCase();
+    setText(newText);
+  };
+
+  const handleLoClick = () => {
+    let newText = text.toLowerCase();
+    setText(newText);
+  };
+
+  const handleClearClick = () => {
+    setText("");
+  };
+
+  const handleCopyClick = () => {
+    let textArea = document.getElementById("exampleFormControlTextarea1");
+    textArea.select();
+    navigator.clipboard.writeText(textArea.value);
+  };
+
+  const handleCapitalizeClick = () => {
+    let newText = text
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    setText(newText);
+  };
+
+  const handleExtraSpace = () => {
+    let newText = text.split(/[ ]+/).join(" ");
+    setText(newText);
+  };
+
+  
+// download file
+const handleDownloadClick = () => {
+  const filename = "downloaded_text.word";
+   downloadStyledTextFile(filename, text, fontStyle);
+  };
+
+  const handleFontStyleChange = (event) => {
+    setFontStyle(event.target.value);
+  };
+
+  const downloadStyledTextFile = (filename, text, fontStyle) => {
+    const blob = new Blob([text], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = window.URL.createObjectURL(blob);
+    link.style.fontFamily = fontStyle;
+    link.click();
+    window.URL.revokeObjectURL(link.href);
+   }
+  
+
+  const calculateCounts = (text) => {
+    const charCount = text.length;
+    const wordCount = text.split(/\s+/).filter((word) => word.length > 0).length;
+    const sentenceCount = text.split(/[.!?]+/).filter((sentence) => sentence.trim().length > 0).length;
+    const lineCount = text.split(/\n/).length;
+    return { charCount, wordCount, sentenceCount, lineCount };
+  };
+
+  const { charCount, wordCount, sentenceCount, lineCount } = calculateCounts(text);
+
+  // Image to WebP Handlers
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (!file) {
+      alert("Please select an image file.");
+      return;
+    }
+    setSelectedFile(file);
+    setImageName(file.name.split(".")[0]);
+  };
+
+  const handleConvert = () => {
+    if (!selectedFile) {
+      alert("No file selected. Please choose a file to convert.");
+      return;
+    }
+    convertImageToWebP(selectedFile);
+  };
+
+  const convertImageToWebP = (file) => {
+    const reader = new FileReader();
+    const img = new Image();
+
+    reader.onload = (e) => {
+      img.src = e.target.result;
+    };
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            setConvertedWebP(URL.createObjectURL(blob));
+          } else {
+            alert("Failed to convert image to WebP.");
+          }
+        },
+        "image/webp",
+        0.8
+      );
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const downloadWebP = () => {
+    const link = document.createElement("a");
+    link.href = convertedWebP;
+    link.download = `${imageName}.webp`;
+    link.click();
+  };
+
+  return (
+    <>
+      <div className="container">
+        <h1>{props.heading}</h1>
+        <div className="mb-3">
+          <textarea
+            className="form-control"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            style={{ fontFamily: fontStyle }}
+            id="exampleFormControlTextarea1"
+            rows="8"
+          ></textarea>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="fontStyleSelect">Choose font style:</label>
+          <select id="fontStyleSelect" onChange={handleFontStyleChange} className="form-select">
+            <option value="cursive">Cursive</option>
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Monospace">Monospace</option>
+          </select>
+        </div>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
+          Convert to Uppercase
+        </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleLoClick}>
+          Convert to Lowercase
+        </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleCapitalizeClick}>
+          Capitalize Case
+        </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleClearClick}>
+          Clear text
+        </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleExtraSpace}>
+          Remove Extra Spaces
+        </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleCopyClick}>
+          Copy to Clipboard
+        </button>
+        {/* <div className="container my-4">
+          <h2>Image to WebP Converter</h2>
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/svg+xml"
+            className="form-control"
+            onChange={handleFileChange}
+          />
+          <button className="btn btn-primary my-2" onClick={handleConvert}>
+            Convert to WebP
+          </button>
+          {convertedWebP && (
+            <>
+              <img src={convertedWebP} alt="Converted WebP" className="img-fluid" />
+              <button className="btn btn-success my-2" onClick={downloadWebP}>
+                Download WebP
+              </button>
+            </>
+          )}
+        </div> */}
+      </div>
+      <div className="container my-3">
+        <h1>Your text summary</h1>
+        <p>
+          Character Count: {charCount} | Word Count: {wordCount} | Sentence Count: {sentenceCount} | Line Count:{" "}
+          {lineCount}
+        </p>
+        <p>{0.008 * text.split("").length} minutes read</p>
+        <h3 style={{ fontFamily: fontStyle }}>{text}</h3>
+      </div>
+    </>
+  );
+}
+
+
+
+//App.js file data
+/* eslint-disable no-const-assign */
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import { useState, useEffect } from 'react';
+import './App.css';
+// import About from './Components/About'; // Remove if not used
+import Navbar from './Components/Navbar';
+import TextForm from './Components/TextForm';
+// import ImageToWebPConverter from './Components/ImageToWebPConverter'; // Corrected the component name
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  const [mode, setMode] = useState('dark'); // Corrected mode state initialization to lowercase
+
+  const toggleMode = () => {
+    if (mode === 'light') {
+      setMode('dark');
+      document.body.style.backgroundColor = 'black';
+    } else {
+      setMode('light');
+      document.body.style.backgroundColor = 'white';
+    }
+  };
+
+  // Set initial background color based on the mode
+  useEffect(() => {
+    document.body.style.backgroundColor = mode === 'dark' ? 'black' : 'white';
+  }, [mode]);
+
+  return (
+    <>
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+      <div className="container my-3">
+        <TextForm heading="Enter the text to Analyze below" />
+        {/* <ImageToWebPConverter /> */}
+      </div>
+    </>
+  );
+}
+
+export default App;
+
+
+/* eslint-disable no-const-assign */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
+import './App.css';
+// import About from './Components/About'; // Remove if not used
+import Navbar from './Components/Navbar';
+import TextForm from './Components/TextForm';
+import ImageToWebPConverter from './Components/ImageToWebPConverter'; // Corrected the component name
+import "bootstrap/dist/css/bootstrap.min.css";
+// import AdvancedImageConverter from './Components/ImageToWebPConverter';
+function App() {
+  const [mode, setMode] = useState('dark'); // Corrected mode state initialization to lowercase
+
+  const toggleMode = () => {
+    if (mode === 'light') {
+      setMode('dark');
+      document.body.style.backgroundColor = 'black';
+      document.body.style.color = 'white'; // Change text color for dark mode
+    } else {
+      setMode('light');
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = 'black'; // Change text color for light mode
+    }
+  };
+
+  // Set initial background color and text color based on the mode
+  useEffect(() => {
+    document.body.style.backgroundColor = mode === 'dark' ? 'black' : 'white';
+    document.body.style.color = mode === 'dark' ? 'white' : 'black';
+  }, [mode]);
+
+  return (
+    <>
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+      <div className="container my-3">
+        <TextForm heading="Enter the text to Analyze below" />
+        <ImageToWebPConverter />
+        {/* <AdvancedImageConverter /> */}
+      </div>
+    </>
+  );
+}
+
+export default App;

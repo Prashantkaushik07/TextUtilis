@@ -1,0 +1,3 @@
+[submodule "TextUtils"]
+    path = TextUtils
+    url = https://github.com/Prashantkaushik07/TextUtilis.git
