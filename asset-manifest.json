@@ -1,15 +1,19 @@
 {
   "files": {
-    "main.css": "/TextUtilis/static/css/main.a8032367.css",
-    "main.js": "/TextUtilis/static/js/main.b983e7b6.js",
-    "static/js/453.2a2d5162.chunk.js": "/TextUtilis/static/js/453.2a2d5162.chunk.js",
+    "main.css": "/TextUtilis/static/css/main.f77632a9.chunk.css",
+    "main.js": "/TextUtilis/static/js/main.140f7113.chunk.js",
+    "main.js.map": "/TextUtilis/static/js/main.140f7113.chunk.js.map",
+    "runtime~main.js": "/TextUtilis/static/js/runtime~main.9709bf69.js",
+    "runtime~main.js.map": "/TextUtilis/static/js/runtime~main.9709bf69.js.map",
+    "static/css/2.b71989ea.chunk.css": "/TextUtilis/static/css/2.b71989ea.chunk.css",
+    "static/js/2.29af3025.chunk.js": "/TextUtilis/static/js/2.29af3025.chunk.js",
+    "static/js/2.29af3025.chunk.js.map": "/TextUtilis/static/js/2.29af3025.chunk.js.map",
+    "static/js/3.a29efab2.chunk.js": "/TextUtilis/static/js/3.a29efab2.chunk.js",
+    "static/js/3.a29efab2.chunk.js.map": "/TextUtilis/static/js/3.a29efab2.chunk.js.map",
     "index.html": "/TextUtilis/index.html",
-    "main.a8032367.css.map": "/TextUtilis/static/css/main.a8032367.css.map",
-    "main.b983e7b6.js.map": "/TextUtilis/static/js/main.b983e7b6.js.map",
-    "453.2a2d5162.chunk.js.map": "/TextUtilis/static/js/453.2a2d5162.chunk.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.a8032367.css",
-    "static/js/main.b983e7b6.js"
-  ]
+    "precache-manifest.12bca823b5cb79cf1d1ca793eb5d7e19.js": "/TextUtilis/precache-manifest.12bca823b5cb79cf1d1ca793eb5d7e19.js",
+    "service-worker.js": "/TextUtilis/service-worker.js",
+    "static/css/2.b71989ea.chunk.css.map": "/TextUtilis/static/css/2.b71989ea.chunk.css.map",
+    "static/css/main.f77632a9.chunk.css.map": "/TextUtilis/static/css/main.f77632a9.chunk.css.map"
+  }
 }
