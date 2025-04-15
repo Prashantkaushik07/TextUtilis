@@ -62,6 +62,8 @@ export default function Login({ onLogin }) {
           <p style={{ color: "red", marginTop: "0.5rem" }}>{errorMessage}</p>
         )}
       </form>
+      <a href="https://b2cqaapp.redingtonmea.com/platinumcardoffers?access_code=6&company_code=1140&country_code=AE&lang=en" target="_blank" rel="noopener noreferrer" className="mt-3" />
+        <button className="btn btn-primary">Sign Up</button>
     </div>
-  );
+  ); 
 }
