@@ -1,0 +1,112 @@
+/* Example LoginForm.css */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Make background dark if desired */
+body {
+  background-color: #0b0b10; 
+  font-family: "Poppins", sans-serif;
+  color: #fff; /* Default text color */
+}
+
+/* Parent container fills viewport, uses flex from your JSX classes */
+.login-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden; /* hides circle overflow if they go off-screen */
+}
+
+/* Circles (blurred) */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px); 
+  opacity: 0.7;
+  z-index: 0; /* behind the form */
+}
+
+/* Blue circle top-left */
+.circle-blue {
+  width: 350px;
+  height: 350px;
+  top: -5%;
+  left: -10%;
+  background: linear-gradient(135deg, #1845ad, #23a2f6);
+}
+
+/* Orange circle bottom-right */
+.circle-orange {
+  width: 350px;
+  height: 350px;
+  bottom: -10%;
+  right: -5%;
+  background: linear-gradient(135deg, #ff512f, #f09819);
+}
+
+/* Glassy form */
+.glass-form {
+  position: relative;
+  z-index: 1; /* on top of circles */
+  width: 350px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(50px);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Text styling */
+.glass-form h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.glass-form label {
+  display: block;
+  margin: 1rem 0 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.glass-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #2b2b33; 
+  color: #e5e5e5;
+  font-size: 0.95rem;
+}
+
+.glass-form input::placeholder {
+  color: #9a9a9a;
+}
+
+/* Button */
+.glass-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1.2rem;
+  background-color: #fff;
+  color: #080710;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* On hover, slightly lighten/darken */
+.glass-form button[type="submit"]:hover {
+  background-color: #f3f3f3;
+}
